@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import com.cobanogluhasan.testing.R
 import com.cobanogluhasan.testing.databinding.FragmentDetailsBinding
 import com.cobanogluhasan.testing.databinding.FragmentSearchApiBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SearchApiFragment : Fragment(R.layout.fragment_search_api) {
 
     private var binding: FragmentSearchApiBinding? = null
