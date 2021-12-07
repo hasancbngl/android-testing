@@ -18,10 +18,17 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         binding = FragmentMainBinding.bind(view)
 
         binding?.apply {
-            rootLayout?.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.black))
+           // rootLayout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.black))
             fab.setOnClickListener {
-                MainFragmentDirections.actionMainFragmentToDetailsFragment()
+                findNavController().navigate(
+                    MainFragmentDirections.actionMainFragmentToDetailsFragment()
+                )
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
     }
 }

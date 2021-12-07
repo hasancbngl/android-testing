@@ -15,4 +15,9 @@ class SearchApiFragment : Fragment(R.layout.fragment_search_api) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSearchApiBinding.bind(view)
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
 }
