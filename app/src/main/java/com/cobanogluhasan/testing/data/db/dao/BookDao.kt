@@ -1,8 +1,8 @@
-package com.cobanogluhasan.testing.data.dao
+package com.cobanogluhasan.testing.data.db.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.cobanogluhasan.testing.data.model.Book
+import com.cobanogluhasan.testing.data.db.model.Book
 
 @Dao
 interface BookDao {
