@@ -3,6 +3,7 @@ package com.cobanogluhasan.testing.data.repository
 import androidx.lifecycle.LiveData
 import com.cobanogluhasan.testing.data.db.entity.Book
 import com.cobanogluhasan.testing.data.model.ImagesResponse
+import com.cobanogluhasan.testing.util.Resource
 
 interface BookRepositoryInterface {
 
@@ -12,5 +13,5 @@ interface BookRepositoryInterface {
 
     fun getBooks(): LiveData<List<Book>>
 
-    suspend fun searchImage(imageString: String): ImagesResponse
+    suspend fun searchImage(imageString: String): Resource<ImagesResponse>
 }
