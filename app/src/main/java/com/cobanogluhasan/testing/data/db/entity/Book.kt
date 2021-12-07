@@ -1,4 +1,4 @@
-package com.cobanogluhasan.testing.data.db.model
+package com.cobanogluhasan.testing.data.db.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

@@ -1,10 +1,10 @@
-package com.cobanogluhasan.testing.di
+package com.cobanogluhasan.testing.data.di
 
 import android.content.Context
 import androidx.room.Room
 import com.cobanogluhasan.testing.data.api.RetrofitAPI
 import com.cobanogluhasan.testing.data.db.BookDatabase
-import com.cobanogluhasan.testing.utils.Constants.BASE_URL
+import com.cobanogluhasan.testing.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -2,7 +2,7 @@ package com.cobanogluhasan.testing.data.db.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
-import com.cobanogluhasan.testing.data.db.model.Book
+import com.cobanogluhasan.testing.data.db.entity.Book
 
 @Dao
 interface BookDao {

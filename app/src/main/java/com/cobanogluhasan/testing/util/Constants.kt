@@ -1,4 +1,4 @@
-package com.cobanogluhasan.testing.utils
+package com.cobanogluhasan.testing.util
 
 object Constants {
 
