@@ -1,11 +1,15 @@
 package com.cobanogluhasan.testing.ui.view.fragments
 
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
+import androidx.constraintlayout.motion.widget.OnSwipe
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.cobanogluhasan.testing.R
 import com.cobanogluhasan.testing.databinding.FragmentMainBinding
 import com.cobanogluhasan.testing.ui.adapters.BookRecyclerAdapter
@@ -20,6 +24,7 @@ class MainFragment @Inject constructor(
 
     private var binding: FragmentMainBinding? = null
     private val viewModel: BookViewModel by activityViewModels()
+    private var swipeListener: ItemTouchHelper.SimpleCallback? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -32,6 +37,26 @@ class MainFragment @Inject constructor(
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+    }
+
+    private fun initSwipeListener(recyclerView: RecyclerView) {
+        swipeListener = object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean = true
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val layoutPosition = viewHolder.layoutPosition
+                val book = bookAdapter.differ.currentList[layoutPosition]
+                viewModel.deleteBook(book)
+            }
+        }
+        swipeListener?.let {
+            ItemTouchHelper(it).attachToRecyclerView(recyclerView)
+        }
     }
 
     private fun observeLiveData() {
@@ -52,6 +77,7 @@ class MainFragment @Inject constructor(
         binding?.recyclerview?.apply {
             adapter = bookAdapter
             layoutManager = LinearLayoutManager(requireContext())
+            initSwipeListener(this)
         }
     }
 }

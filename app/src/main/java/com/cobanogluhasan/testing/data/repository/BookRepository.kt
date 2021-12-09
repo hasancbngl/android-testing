@@ -28,14 +28,16 @@ class BookRepository @Inject constructor(
 
     override suspend fun searchImage(imageString: String): Resource<ImagesResponse> {
         return try {
-            val response = retrofitAPI.imageSearch(imageString, API_KEY)
+            val response = retrofitAPI.imageSearch(imageString)
             if (response.isSuccessful) {
-                response.body().let {
+                response.body()?.let {
                     return@let Resource.success(it)
-                } ?: Resource.error("error", null)
-            } else Resource.error("Error Occured", null)
+                } ?: Resource.error("Error",null)
+            } else {
+                Resource.error("Error",null)
+            }
         } catch (e: Exception) {
-            Resource.error(e.message.toString(), null)
+            Resource.error("${e.message} , ${e.printStackTrace()}",null)
         }
     }
 }

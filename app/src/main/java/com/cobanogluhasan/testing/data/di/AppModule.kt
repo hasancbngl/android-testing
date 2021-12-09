@@ -16,8 +16,10 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
@@ -36,13 +38,22 @@ object AppModule {
     @Singleton
     @Provides
     fun injectRetrofit(): RetrofitAPI {
-        return Retrofit.Builder().addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(BASE_URL).build().create(RetrofitAPI::class.java)
+        val logging = HttpLoggingInterceptor()
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+        val client = okhttp3.OkHttpClient.Builder()
+            .addInterceptor(logging)
+            .callTimeout(6000, TimeUnit.MILLISECONDS)
+            .build()
+        return Retrofit.Builder().baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create()).client(client)
+            .build().create(RetrofitAPI::class.java)
     }
+
 
     @Singleton
     @Provides
-    fun injectRepo(dao: BookDao, api: RetrofitAPI)  = BookRepository(dao, api) as BookRepositoryInterface
+    fun injectRepo(dao: BookDao, api: RetrofitAPI) =
+        BookRepository(dao, api) as BookRepositoryInterface
 
     @Singleton
     @Provides

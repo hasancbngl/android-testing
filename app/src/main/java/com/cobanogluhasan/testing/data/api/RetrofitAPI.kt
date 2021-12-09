@@ -8,7 +8,7 @@ import retrofit2.http.Query
 
 interface RetrofitAPI {
 
-    @GET("api/")
+    @GET("/api/")
     suspend fun imageSearch(
         @Query("q") searchQuery: String,
         @Query("key") apiKey: String = API_KEY,

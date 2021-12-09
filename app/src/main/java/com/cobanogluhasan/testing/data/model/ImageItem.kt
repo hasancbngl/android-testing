@@ -1,6 +1,7 @@
 package com.cobanogluhasan.testing.data.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class ImageItem(
     val comments: Int,
@@ -9,24 +10,21 @@ data class ImageItem(
     val id: Int,
     val imageHeight: Int,
     val imageSize: Int,
-    val imageWidth: Int,
-    val largeImageUrl: Int,
+    val imageWidth : Int,
+    val largeImageURL: String,
     val likes: Int,
-    val pageUrl: String,
+    val pageURL : String,
     val previewHeight: Int,
-    val previewUrl: String,
-    val previewWidth: Int,
+    val previewURL: String,
+    val previewWidth:Int,
     val tags: String,
     val type: String,
     val user: String,
     @SerializedName("user_id")
-    val userId: Int,
-    val userImageUrl: String,
-    val views: Int,
-    @SerializedName("webformatHeight")
-    val webFormatHeight: Int,
-    @SerializedName("webformatURL")
-    val webFormatURL: Int,
-    @SerializedName("webformatWidth")
-    val webFormatWidth: Int,
-)
+    val userId : Int,
+    val userImageURL: String,
+    val views : Int,
+    val webformatHeight: Int,
+    val webformatURL: String,
+    val webformatWidth: Int
+) : Serializable
