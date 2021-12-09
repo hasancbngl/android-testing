@@ -28,8 +28,20 @@ class DetailsFragment @Inject constructor(
                     DetailsFragmentDirections.actionDetailsFragmentToSearchApiFragment()
                 )
             }
+            container.setOnClickListener {
+                findNavController().navigate(DetailsFragmentDirections.actionDetailsFragmentToSearchApiFragment())
+            }
         }
 
+        overrideBackPressed()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding = null
+    }
+
+    fun overrideBackPressed() {
         //nav components do this already but we can use it
         //in case we wanna add something more
         val callback = object : OnBackPressedCallback(true) {
@@ -37,12 +49,6 @@ class DetailsFragment @Inject constructor(
                 findNavController().popBackStack()
             }
         }
-
         requireActivity().onBackPressedDispatcher.addCallback(callback)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        binding = null
     }
 }

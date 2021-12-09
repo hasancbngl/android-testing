@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.RequestManager
-import com.cobanogluhasan.testing.data.model.ImageItem
 import com.cobanogluhasan.testing.databinding.RecyclerImageItemBinding
 import javax.inject.Inject
 
