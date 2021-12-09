@@ -1,4 +1,4 @@
-package com.cobanogluhasan.testing.data.di
+package com.cobanogluhasan.testing.di
 
 import android.content.Context
 import androidx.room.Room

@@ -28,24 +28,12 @@ class DetailsFragment @Inject constructor(
 
         binding = FragmentDetailsBinding.bind(view)
         initClickListeners()
-      //  overrideBackPressed()
         observeViewModel()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
-    }
-
-    fun overrideBackPressed() {
-        //nav components do this already but we can use it
-        //in case we wanna add something more
-        val callback = object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                findNavController().popBackStack()
-            }
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(callback)
     }
 
     private fun initClickListeners() {
