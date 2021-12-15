@@ -24,31 +24,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
-
-    @Singleton
-    @Provides
-    fun injectRoomDb(@ApplicationContext context: Context) =
-        Room.databaseBuilder(context, BookDatabase::class.java, "BookDB").build()
-
-    @Singleton
-    @Provides
-    fun injectDao(db: BookDatabase) = db.bookDao()
-
-    @Singleton
-    @Provides
-    fun injectRetrofit(): RetrofitAPI {
-        val logging = HttpLoggingInterceptor()
-        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
-        val client = okhttp3.OkHttpClient.Builder()
-            .addInterceptor(logging)
-            .callTimeout(6000, TimeUnit.MILLISECONDS)
-            .build()
-        return Retrofit.Builder().baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create()).client(client)
-            .build().create(RetrofitAPI::class.java)
-    }
-
+class AppModule {
 
     @Singleton
     @Provides
@@ -62,18 +38,4 @@ object AppModule {
             RequestOptions().placeholder(R.drawable.ic_launcher_foreground)
                 .error(R.drawable.ic_launcher_foreground)
         )
-
-
-    /*
-    **Retrofit example with dynamic url and custom api class
-    @Singleton
-    @Provides
-    fun injectRetrofit(s: String, c: Any): Any? {
-        return Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl(BASE_URL).build().create(c as Class<*>)
-    }
-
-    * injectRetrofit("http", RetrofitAPI::class.java)
-     */
 }
