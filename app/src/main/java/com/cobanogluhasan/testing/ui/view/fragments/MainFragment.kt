@@ -6,6 +6,7 @@ import android.view.View
 import androidx.constraintlayout.motion.widget.OnSwipe
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +16,7 @@ import com.cobanogluhasan.testing.databinding.FragmentMainBinding
 import com.cobanogluhasan.testing.ui.adapters.BookRecyclerAdapter
 import com.cobanogluhasan.testing.ui.viewmodel.BookViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -29,9 +31,11 @@ class MainFragment @Inject constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentMainBinding.bind(view)
-        observeLiveData()
-        setClickListeners()
-        initRecycler()
+        lifecycleScope.launch {
+            observeLiveData()
+            setClickListeners()
+            initRecycler()
+        }
     }
 
     override fun onDestroyView() {

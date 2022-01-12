@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.RequestManager
 import com.cobanogluhasan.testing.R
@@ -13,6 +14,7 @@ import com.cobanogluhasan.testing.databinding.FragmentDetailsBinding
 import com.cobanogluhasan.testing.ui.viewmodel.BookViewModel
 import com.cobanogluhasan.testing.util.Status
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -25,10 +27,11 @@ class DetailsFragment @Inject constructor(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding = FragmentDetailsBinding.bind(view)
-        initClickListeners()
-        observeViewModel()
+        lifecycleScope.launch {
+            initClickListeners()
+            observeViewModel()
+        }
     }
 
     override fun onDestroyView() {
@@ -67,7 +70,7 @@ class DetailsFragment @Inject constructor(
                     findNavController().popBackStack()
                 }
                 Status.ERROR -> message = it.message.toString()
-                Status.LOADING -> message =  "Loading"
+                Status.LOADING -> message = "Loading"
             }
             Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
         })

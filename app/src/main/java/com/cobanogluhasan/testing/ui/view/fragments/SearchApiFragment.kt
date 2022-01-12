@@ -35,9 +35,11 @@ class SearchApiFragment @Inject constructor(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSearchApiBinding.bind(view)
+        lifecycleScope.launch {
             obverseData()
             initRecyclerAdapter()
             initSearchImage()
+        }
     }
 
     override fun onDestroyView() {
@@ -49,7 +51,7 @@ class SearchApiFragment @Inject constructor(
         lifecycleScope.launch {
             delay(1200)
             binding?.searchEdittext?.addTextChangedListener {
-                if(it?.isNotEmpty() == true) viewModel.searchImage(it.toString())
+                if (it?.isNotEmpty() == true) viewModel.searchImage(it.toString())
             }
         }
     }
