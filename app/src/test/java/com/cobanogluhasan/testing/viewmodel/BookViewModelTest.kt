@@ -28,12 +28,18 @@ class BookViewModelTest {
         viewModel = BookViewModel(FakeBookRepository())
     }
 
-    //do not do threading in testing
     @Test
     fun `insert book without year returns error`() {
-        viewModel.makeBook("dostoyesvki", bookName = "insancıklar", "")
+        viewModel.makeBook("dostoyesvki", bookName = "insancıklar", "a")
         val value = viewModel.insertBookmsg.getOrAwaitValueTest()
         assertThat(value.status).isEqualTo(Status.ERROR)
+    }
+
+    @Test
+    fun `insert book with year of string returns error`() {
+        viewModel.makeBook("albert camus", "yabancı", "aaaa")
+        val status = viewModel.insertBookmsg.getOrAwaitValueTest().status
+        assertThat(status).isEqualTo(Status.ERROR)
     }
 
     @Test
