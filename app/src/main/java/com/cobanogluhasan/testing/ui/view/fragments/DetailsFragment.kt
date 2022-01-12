@@ -63,6 +63,7 @@ class DetailsFragment @Inject constructor(
             when (it.status) {
                 Status.SUCCESS -> {
                     message = "Success!"
+                    viewModel.resetInsertMsg()
                     findNavController().popBackStack()
                 }
                 Status.ERROR -> message = it.message.toString()

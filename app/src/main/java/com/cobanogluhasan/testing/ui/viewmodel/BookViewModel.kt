@@ -34,9 +34,9 @@ class BookViewModel @Inject constructor(
         get() = insertMessage
 
     //if it don't get reseted will always hold the first value
-    /* fun resetInsertMsg() {
-         insertMessage = MutableLiveData<Resource<Book>>()
-     } */
+    fun resetInsertMsg() {
+        insertMessage = MutableLiveData<Resource<Book>>()
+    }
 
     fun setSelectedImageUrl(url: String) {
         selectedImage.postValue(url)
