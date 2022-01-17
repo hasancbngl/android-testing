@@ -42,14 +42,18 @@ class BookDaoTest {
 
     @Test
     fun insertBookTest() = runBlockingTest {
-        val demoBook = Book("book","test",1970,"")
+        val demoBook = Book("book","test",1970,"", 1)
         dao.insertBook(demoBook)
         val list = dao.observeBooks().getOrAwaitValueTest()
-        assertThat(list.size).isEqualTo(1)
+        assertThat(list).contains(demoBook)
     }
 
     @Test
     fun deleteBookTest() = runBlockingTest {
-       // dao.deleteBook()
+        val demoBook = Book("book","test",1970,"", 1)
+        dao.insertBook(demoBook)
+        dao.deleteBook(demoBook)
+        val list = dao.observeBooks().getOrAwaitValueTest()
+        assertThat(list).doesNotContain(demoBook)
     }
 }
