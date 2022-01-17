@@ -9,7 +9,7 @@ import java.util.concurrent.TimeoutException
 /* Copyright 2019 Google LLC.
    SPDX-License-Identifier: Apache-2.0 */
 
-fun <T> LiveData<T>.getOrAwaitValue(
+fun <T> LiveData<T>.getOrAwaitValueTest(
     time: Long = 2,
     timeUnit: TimeUnit = TimeUnit.SECONDS
 ): T {
@@ -19,7 +19,7 @@ fun <T> LiveData<T>.getOrAwaitValue(
         override fun onChanged(o: T?) {
             data = o
             latch.countDown()
-            this@getOrAwaitValue.removeObserver(this)
+            this@getOrAwaitValueTest.removeObserver(this)
         }
     }
 
