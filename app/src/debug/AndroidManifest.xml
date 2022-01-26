@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cobanogluhasan.testing">
 
-    <application>
+    <application
+        android:allowBackup="true"
+        android:fullBackupContent="true">
         <activity android:name=".HiltTestActivity"
             android:exported="false"/>
     </application>
