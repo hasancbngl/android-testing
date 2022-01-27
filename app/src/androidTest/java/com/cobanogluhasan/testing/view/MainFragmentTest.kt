@@ -3,7 +3,7 @@ package com.cobanogluhasan.testing.view
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.test.espresso.Espresso
-import androidx.test.espresso.action.ViewActions
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.filters.MediumTest
 import com.cobanogluhasan.testing.R
@@ -13,16 +13,15 @@ import com.cobanogluhasan.testing.ui.view.fragments.MainFragment
 import com.cobanogluhasan.testing.ui.view.fragments.MainFragmentDirections
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.Mockito
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.verify
 import javax.inject.Inject
 
 @MediumTest
 @HiltAndroidTest
-@ExperimentalCoroutinesApi
 class MainFragmentTest {
 
     @get:Rule
@@ -38,15 +37,15 @@ class MainFragmentTest {
 
     @Test
     fun testNavigationFromMainToDetails() {
-        val navController = Mockito.mock(NavController::class.java)
+        val navController = mock(NavController::class.java)
 
         launchFragmentInHiltContainer<MainFragment>(
             factory = fragmentFactory
         ) {
             Navigation.setViewNavController(requireView(), navController)
         }
-        Espresso.onView(ViewMatchers.withId(R.id.fab)).perform(ViewActions.click())
-        Mockito.verify(navController)
+        Espresso.onView(ViewMatchers.withId(R.id.fab)).perform(click())
+        verify(navController)
             .navigate(MainFragmentDirections.actionMainFragmentToDetailsFragment())
     }
 }
