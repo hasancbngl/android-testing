@@ -1,10 +1,7 @@
 package com.cobanogluhasan.testing.roomdb
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.room.Room
-import androidx.test.core.app.ApplicationProvider
 import androidx.test.filters.SmallTest
-import com.cobanogluhasan.testing.HiltTestRunner
 import com.cobanogluhasan.testing.data.db.BookDatabase
 import com.cobanogluhasan.testing.data.db.dao.BookDao
 import com.cobanogluhasan.testing.data.db.entity.Book
