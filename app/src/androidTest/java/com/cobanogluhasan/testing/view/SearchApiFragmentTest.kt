@@ -15,7 +15,6 @@ import com.cobanogluhasan.testing.repo.FakeBookRepositoryAndroid
 import com.cobanogluhasan.testing.ui.adapters.ImageRecyclerAdapter
 import com.cobanogluhasan.testing.ui.view.CustomFragmentFactory
 import com.cobanogluhasan.testing.ui.view.fragments.SearchApiFragment
-import com.cobanogluhasan.testing.ui.view.fragments.SearchApiFragmentDirections
 import com.cobanogluhasan.testing.ui.viewmodel.BookViewModel
 import com.google.common.truth.Truth.assertThat
 import dagger.hilt.android.testing.HiltAndroidRule
@@ -64,7 +63,7 @@ class SearchApiFragmentTest {
         Espresso.onView(withId(R.id.recycler)).perform(
             RecyclerViewActions.actionOnItemAtPosition<ImageRecyclerAdapter.ViewHolder>(0, click())
         )
-        verify(navController).navigate(SearchApiFragmentDirections.actionSearchApiFragmentToDetailsFragment())
+        verify(navController).popBackStack()
         assertThat(testViewModel.selectedImageUrl.getOrAwaitValueTest()).isEqualTo(selectedImageUrl)
     }
 }

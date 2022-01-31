@@ -1,8 +1,6 @@
 package com.cobanogluhasan.testing.ui.view.fragments
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import androidx.core.widget.addTextChangedListener
@@ -11,17 +9,15 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.bumptech.glide.load.engine.Resource
 import com.cobanogluhasan.testing.R
-import com.cobanogluhasan.testing.databinding.FragmentDetailsBinding
 import com.cobanogluhasan.testing.databinding.FragmentSearchApiBinding
 import com.cobanogluhasan.testing.ui.adapters.ImageRecyclerAdapter
 import com.cobanogluhasan.testing.ui.viewmodel.BookViewModel
 import com.cobanogluhasan.testing.util.Status
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.*
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import javax.inject.Inject
-import javax.security.auth.login.LoginException
 
 private const val TAG = "SearchApiFragment"
 
@@ -64,7 +60,7 @@ class SearchApiFragment @Inject constructor(
         }
         imageAdapter.setOnItemClickListener {
             viewModel.setSelectedImageUrl(it)
-            findNavController().navigate(SearchApiFragmentDirections.actionSearchApiFragmentToDetailsFragment())
+            findNavController().popBackStack()
         }
     }
 
