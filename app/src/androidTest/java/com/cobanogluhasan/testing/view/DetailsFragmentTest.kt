@@ -3,9 +3,7 @@ package com.cobanogluhasan.testing.view
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.replaceText
 import androidx.test.espresso.matcher.ViewMatchers
@@ -68,7 +66,8 @@ class DetailsFragmentTest {
         launchFragmentInHiltContainer<DetailsFragment>(
             factory = fragmentFactory
         ) {
-             mockViewModel = testViewModel
+            //  create late init mockviewmodel and use it on button click
+            // mockViewModel = testViewModel
         }
 
         onView(ViewMatchers.withId(R.id.nameEditText)).perform(replaceText("insancıklar"))

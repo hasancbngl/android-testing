@@ -3,7 +3,6 @@ package com.cobanogluhasan.testing.ui.view.fragments
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -23,7 +22,6 @@ class DetailsFragment @Inject constructor(
 ) : Fragment(R.layout.fragment_details) {
 
     private var binding: FragmentDetailsBinding? = null
-    lateinit var mockViewModel: BookViewModel
     private val viewModel: BookViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,7 +41,7 @@ class DetailsFragment @Inject constructor(
     private fun initClickListeners() {
         binding?.apply {
             saveBtn.setOnClickListener {
-                mockViewModel.makeBook(
+                viewModel.makeBook(
                     authorEdittext.text.toString(),
                     nameEditText.text.toString(),
                     yearEdittext.text.toString()

@@ -27,11 +27,12 @@ private const val TAG = "SearchApiFragment"
 
 @AndroidEntryPoint
 class SearchApiFragment @Inject constructor(
-    private val imageAdapter: ImageRecyclerAdapter
+   private val imageAdapter: ImageRecyclerAdapter
 ) : Fragment(R.layout.fragment_search_api) {
 
     private var binding: FragmentSearchApiBinding? = null
     private val viewModel: BookViewModel by activityViewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSearchApiBinding.bind(view)
@@ -63,7 +64,7 @@ class SearchApiFragment @Inject constructor(
         }
         imageAdapter.setOnItemClickListener {
             viewModel.setSelectedImageUrl(it)
-            findNavController().popBackStack()
+            findNavController().navigate(SearchApiFragmentDirections.actionSearchApiFragmentToDetailsFragment())
         }
     }
 
