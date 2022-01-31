@@ -23,6 +23,7 @@ class DetailsFragment @Inject constructor(
 ) : Fragment(R.layout.fragment_details) {
 
     private var binding: FragmentDetailsBinding? = null
+    lateinit var mockViewModel: BookViewModel
     private val viewModel: BookViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,7 +43,7 @@ class DetailsFragment @Inject constructor(
     private fun initClickListeners() {
         binding?.apply {
             saveBtn.setOnClickListener {
-                viewModel.makeBook(
+                mockViewModel.makeBook(
                     authorEdittext.text.toString(),
                     nameEditText.text.toString(),
                     yearEdittext.text.toString()
