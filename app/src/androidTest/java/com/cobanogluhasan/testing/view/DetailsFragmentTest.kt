@@ -68,14 +68,8 @@ class DetailsFragmentTest {
         verify(navController).navigate(DetailsFragmentDirections.actionDetailsFragmentToSearchApiFragment())
     }
 
-    fun assertMainFragment() {
-
-        onView(ViewMatchers.withId(R.id.fab)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
-    }
-
     @Test(expected = NoActivityResumedException::class)
     fun testOnBackPressed() {
-        assertMainFragment()
         val navController = mock(NavController::class.java)
         launchFragmentInHiltContainer<DetailsFragment>(
             factory = fragmentFactory

@@ -4,6 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.test.espresso.Espresso
+import androidx.test.espresso.NoActivityResumedException
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.withId
@@ -14,6 +15,7 @@ import com.cobanogluhasan.testing.launchFragmentInHiltContainer
 import com.cobanogluhasan.testing.repo.FakeBookRepositoryAndroid
 import com.cobanogluhasan.testing.ui.adapters.ImageRecyclerAdapter
 import com.cobanogluhasan.testing.ui.view.CustomFragmentFactory
+import com.cobanogluhasan.testing.ui.view.fragments.DetailsFragment
 import com.cobanogluhasan.testing.ui.view.fragments.SearchApiFragment
 import com.cobanogluhasan.testing.ui.viewmodel.BookViewModel
 import com.google.common.truth.Truth.assertThat
@@ -65,5 +67,17 @@ class SearchApiFragmentTest {
         )
         verify(navController).popBackStack()
         assertThat(testViewModel.selectedImageUrl.getOrAwaitValueTest()).isEqualTo(selectedImageUrl)
+    }
+
+    @Test(expected = NoActivityResumedException::class)
+    fun testOnBackPressed() {
+        val navController = mock(NavController::class.java)
+        launchFragmentInHiltContainer<SearchApiFragment>(
+            factory = fragmentFactory
+        ) {
+            Navigation.setViewNavController(requireView(), navController)
+        }
+        Espresso.pressBack()
+        verify(navController).popBackStack()
     }
 }
