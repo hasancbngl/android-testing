@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import androidx.constraintlayout.motion.widget.OnSwipe
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -35,6 +36,8 @@ class MainFragment @Inject constructor(
             observeLiveData()
             setClickListeners()
             initRecycler()
+
+            binding?.root?.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.black))
         }
     }
 
